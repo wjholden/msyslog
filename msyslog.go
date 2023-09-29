@@ -58,6 +58,5 @@ func New(address *net.IP, port uint16) (MSyslog, error) {
 }
 
 func (m MSyslog) Close() error {
-
 	return m.conn.Close()
 }
