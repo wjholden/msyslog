@@ -34,7 +34,6 @@ type MSyslog struct {
 
 func (m MSyslog) Write(p []byte) (int, error) {
 	level := m.Facility*8 + uint8(m.Severity)
-	fmt.Println(level, m.Facility, m.Severity)
 	version := 1
 	timestamp := time.Now().Format(time.RFC3339)
 	var buf bytes.Buffer
