@@ -5,12 +5,13 @@ import (
 	"fmt"
 	"net"
 	"strconv"
+	"strings"
 
 	"golang.org/x/net/ipv6"
 )
 
 var port = flag.Int("port", 514, "UDP port number")
-var address = flag.String("address", "ff02::514", "IPv6 multicast destination")
+var address = flag.String("address", "ff05::514", "IPv6 multicast destination")
 
 func main() {
 	flag.Parse()
@@ -36,6 +37,7 @@ func main() {
 			panic(err)
 		}
 		s := string(buffer[:n])
+		s = strings.TrimSpace(s)
 		fmt.Println(s)
 	}
 }
