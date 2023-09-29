@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net"
 	"os"
+	"strconv"
 	"time"
 )
 
@@ -28,7 +29,7 @@ type MSyslog struct {
 	AppName  string
 	ProcId   string
 	MsgId    string
-	conn     *net.UDPConn
+	conn     net.Conn
 }
 
 func (m MSyslog) Write(p []byte) (int, error) {
@@ -43,8 +44,9 @@ func (m MSyslog) Write(p []byte) (int, error) {
 
 func New(address *net.IP, port uint16) (MSyslog, error) {
 	var logger MSyslog
-	dst := net.UDPAddr{IP: *address, Port: int(port)}
-	conn, err := net.DialUDP("udp", nil, &dst)
+	//dst := net.UDPAddr{IP: *address, Port: int(port)}
+	//conn, err := net.DialUDP("udp", nil, &dst)
+	conn, err := net.Dial("udp", net.JoinHostPort(address.String(), strconv.Itoa(int(port))))
 	if err != nil {
 		return logger, err
 	}

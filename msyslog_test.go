@@ -7,7 +7,7 @@ import (
 )
 
 func TestMain(t *testing.T) {
-	addr := net.ParseIP("ff02::514")
+	addr := net.ParseIP("ff05::514")
 	var port uint16 = 514
 	mlogger, err := New(&addr, port)
 	if err != nil {
